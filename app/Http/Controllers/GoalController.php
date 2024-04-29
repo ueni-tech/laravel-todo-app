@@ -14,8 +14,9 @@ class GoalController extends Controller
     public function index()
     {
         $goals = Auth::user()->goals;
+        $tags = Auth::user()->tags;
 
-        return view('goals.index', compact('goals'));
+        return view('goals.index', compact('goals', 'tags'));
     }
 
     /**

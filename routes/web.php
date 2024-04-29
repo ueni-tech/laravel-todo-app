@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [GoalController::class, 'index']);
+Route::get('/', [GoalController::class, 'index'])->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,4 +31,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('goals', GoalController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('goals', GoalController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
+Route::resource('goals.todos', TodoController::class)->only(['store', 'update', 'destroy'])->middleware('auth');
+Route::resource('tags', TagController::class)->only(['store', 'update', 'destroy'])->middleware('auth');

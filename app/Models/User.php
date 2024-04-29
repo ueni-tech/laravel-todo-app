@@ -46,4 +46,12 @@ class User extends Authenticatable
     public function goals(){
         return $this->hasMany(Goal::class);
     }
+
+    public function todos(){
+        return $this->hasMany(Todo::class);
+    }
+
+    public function tags(){
+        return $this->hasMany(Tag::class);
+    }
 }
